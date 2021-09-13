@@ -40,7 +40,6 @@ public class CLHDemo {
 
         System.out.println(Thread.currentThread().getName() + "释放锁锁成功");
 
-        // 使当前node没被引用，GC回收
         CLHNode newCurNode = new CLHNode();
         curNode.set(newCurNode);
     }
