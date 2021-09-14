@@ -9,7 +9,7 @@ public class SimpleMockLock implements Lock {
 
     private final Sync sync = new Sync();
 
-    private class Sync extends AbstractQueuedSynchronizer{
+    private static class Sync extends AbstractQueuedSynchronizer{
 
         @Override
         protected boolean tryAcquire(int arg) {

@@ -25,7 +25,9 @@ public class CLHDemo {
         CLHNode thisNode = curNode.get();
         thisNode.setLocked(true);
 
+        // 设置当前尾结点为上一节点，设置当前节点为尾结点，
         CLHNode preNode = tailNode.getAndSet(thisNode);
+        // 上一节点获取到锁，该节点等待
         while (preNode.isLocked()){
             System.out.println(Thread.currentThread().getName() + "获取锁失败，自旋等待");
         }
