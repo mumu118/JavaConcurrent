@@ -6,12 +6,12 @@ package designpatterns.template;
  */
 public abstract class AbstractTemplate {
 
-    // 钩子方法 模板方法根据钩子方法判断基本方法的执行
+    // 模板方法根据钩子方法判断基本方法的执行
     public boolean isQueue(){
         return true;
     }
 
-    /*基本方法*/
+    /*钩子方法*/
 
     // 排队
     public abstract void queue();
