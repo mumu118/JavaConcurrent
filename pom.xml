@@ -2,11 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- 模型版本 -->
     <modelVersion>4.0.0</modelVersion>
 
+    <!--   POM project  object model-->
+
+    <!-- 定义当前构件所属的组，通常与域名反向一一对应 -->
     <groupId>org.example</groupId>
+    <!--项目的唯一ID，一个groupId下面可能多个项目，就是靠artifactId来区分的-->
     <artifactId>JavaConcurrent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <!-- 版本号 -->
+    <version>2.0</version>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.openjdk.jol/jol-core -->
@@ -17,6 +27,59 @@
         </dependency>
 
     </dependencies>
+
+    <!--上面我们配置了一个远程仓库，地址是阿里云的maven仓库地址，
+    releases 的 enabled 为 true ， snapshots 的 enabled 为 false ，
+    表示这个远程仓库我们只允许下载稳定版本的构件，
+    而不能从这个仓库中下载快照版本的构件。-->
+
+    <!--
+    id：远程仓库的一个标识，中央仓库的id是 central ，所以添加远程仓库的时候，id不要和中央仓
+    库的id重复，会把中央仓库的覆盖掉
+    url：远程仓库地址
+    releases：主要用来配置是否需要从这个远程仓库下载稳定版本构件
+    snapshots：主要用来配置是否需要从这个远程仓库下载快照版本构件
+    -->
+
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>aliyun-releases</id>-->
+<!--            <url>https://maven.aliyun.com/repository/public</url>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--    </repositories>-->
+
+    <distributionManagement>
+        <repository>
+            <id>release-nexus</id>
+            <url>http://localhost:8081/repository/maven-releases/</url>
+            <name>nexus-releases</name>
+        </repository>
+        <snapshotRepository>
+            <id>snapshot-nexus</id>
+            <url>http://localhost:8081/repository/maven-snapshots/</url>
+            <name>nexus-snapshots</name>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
